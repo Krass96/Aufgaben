@@ -1,3 +1,3 @@
 void main() {
-  print("Hello AppAkademie!");
+  print("Hello AppAkademie!")
 }
