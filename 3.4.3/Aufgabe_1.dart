@@ -6,15 +6,30 @@ void main() {
     {'temp': null, 'rain': 3.8, 'wind': null},
   ];
 
-  // Erstelle leere Liste für Temperaturen
+  // Erstelle leere Liste für Temperaturen, Niederschlagsmenge und Windgeschwindigkeit
   List<double?> temps = [];
+  List<double?> rains = [];
+  List<double?> winds = [];
 
-  // Füge die Temperaturen der Wetterdaten in die Liste ein
+  // Füge die Temperaturen, Niederschlagsmenge und Windgeschwindigkeit der Wetterdaten in die Liste ein
   temps.add(weatherData[0]['temp']);
   temps.add(weatherData[1]['temp']);
   temps.add(weatherData[2]['temp']);
 
-  // Berechne den Durchschnitt der Temperaturen
+  rains.add(weatherData[0]['rain']);
+  rains.add(weatherData[1]['rain']);
+  rains.add(weatherData[2]['rain']);
+
+  winds.add(weatherData[0]['wind']);
+  winds.add(weatherData[1]['wind']);
+  winds.add(weatherData[2]['wind']);
+
+  // Berechne den Durchschnitt der Temperaturen, Niederschlagsmenge und Windgeschwindigkeit
   double? avgTemp = (temps[0]! + temps[1]! + temps[2]!) / 3;
-  print('Durchschnittstemperatur: $avgTemp');
+  double? avgRain = (rains[0]! + rains[1]! + rains[2]!) / 3;
+  double? avgWind = (winds[0]! + winds[1]! + winds[2]!) / 3;
+
+  print('Durchschnittstemperatur: $avgTemp °C');
+  print('Durchschnittsniederschlagsmenge: $avgRain mm');
+  print('Durchschnittswindgeschwindigkeit: $avgWind km/h');
 }
