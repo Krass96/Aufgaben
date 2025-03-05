@@ -24,6 +24,8 @@ void main() {
         case 34:
         case 35:
           print("Im Schnitt 180,4m");
+        default:
+          print("Kein Durschnittswerte verfügbar");
       }
     case ['female']:
       switch (age) {
@@ -46,6 +48,10 @@ void main() {
         case 34:
         case 35:
           print("Im Schnitt 167,2");
+        default:
+          print("Kein Durschnittswerte verfügbar");
       }
+    default:
+      print("Kein Geschlecht ausgewählt");
   }
 }
