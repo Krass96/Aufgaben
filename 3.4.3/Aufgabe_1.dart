@@ -14,22 +14,22 @@ void main() {
   // Füge die Temperaturen, Niederschlagsmenge und Windgeschwindigkeit der Wetterdaten in die Liste ein
   temps.add(weatherData[0]['temp']);
   temps.add(weatherData[1]['temp']);
-  temps.add(weatherData[2]['temp']);
+  temps.add(weatherData[2]['temp'] ?? 0);
 
   rains.add(weatherData[0]['rain']);
-  rains.add(weatherData[1]['rain']);
+  rains.add(weatherData[1]['rain'] ?? 0);
   rains.add(weatherData[2]['rain']);
 
-  winds.add(weatherData[0]['wind']);
+  winds.add(weatherData[0]['wind'] ?? 0);
   winds.add(weatherData[1]['wind']);
-  winds.add(weatherData[2]['wind']);
+  winds.add(weatherData[2]['wind'] ?? 0);
 
   // Berechne den Durchschnitt der Temperaturen, Niederschlagsmenge und Windgeschwindigkeit
-  double? avgTemp = (temps[0]! + temps[1]! + temps[2]!) / 3;
-  double? avgRain = (rains[0]! + rains[1]! + rains[2]!) / 3;
-  double? avgWind = (winds[0]! + winds[1]! + winds[2]!) / 3;
+  double? avgTemp = (temps[0]! + temps[1]! + temps[2]!) / weatherData.length;
+  double? avgRain = (rains[0]! + rains[1]! + rains[2]!) / weatherData.length;
+  double? avgWind = (winds[0]! + winds[1]! + winds[2]!) / weatherData.length;
 
-  print('Durchschnittstemperatur: $avgTemp °C');
-  print('Durchschnittsniederschlagsmenge: $avgRain mm');
-  print('Durchschnittswindgeschwindigkeit: $avgWind km/h');
+  print('Durchschnittstemperatur: $avgTemp ~/ °C');
+  print('Durchschnittsniederschlagsmenge: $avgRain ~/ mm');
+  print('Durchschnittswindgeschwindigkeit: $avgWind ~/ km/h');
 }
