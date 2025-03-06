@@ -8,4 +8,15 @@ void main() {
     'Gregory': 6,
     'Leonhart': 3,
   };
+  for (String name in namePoints.keys) {
+    print('Name: $name');
+  }
+
+  for (int points in namePoints.values) {
+    print('Punkte: $points');
+  }
+
+  for (String name in namePoints.keys) {
+    print('$name: ${namePoints[name]} Punkte');
+  }
 }
