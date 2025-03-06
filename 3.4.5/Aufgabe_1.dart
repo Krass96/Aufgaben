@@ -9,8 +9,13 @@ void main() {
     'Gregory',
     'Leonhart',
   ];
+  int sum = 0;
+  int listLenght = 7;
+  double averageSum = 0.0;
 
-  for (String allNames in names) {
-    print(allNames);
+  for (int p in points) {
+    sum = sum + p;
+    averageSum = sum / listLenght;
   }
+  print(averageSum);
 }
