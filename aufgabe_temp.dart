@@ -29,22 +29,19 @@ void main() {
 
   // 1. Erstelle eine neue Liste, die nur die gültigen Temperaturwerte enthält
 
-  List<double> gueltigeTemperaturWerten = [
-    22.5,
-    18.3,
-    25.7,
-    19.2,
-    23.8,
-    20.5,
-    17.9,
-    24.3,
-  ];
+  List<double> gueltigeTemperaturWerten = [];
+  for (double? temperatur in temperaturDaten) {
+    if (temperatur != null) {
+      gueltigeTemperaturWerten.add(temperatur);
+    }
+  }
 
   // 2. Berechne die Summe aller gültigen Temperaturen
 
-  double sumGultigeTemperaturWerten =
-      22.5 + 18.3 + 25.7 + 19.2 + 23.8 + 20.5 + 17.9 + 24.3;
-
+  double sumGultigeTemperaturWerten = 0;
+  for (double temperatur in gueltigeTemperaturWerten) {
+    sumGultigeTemperaturWerten += temperatur;
+  }
   // 3. Berechne den Durchschnitt (Summe / Anzahl)
 
   double durchschnitt =
