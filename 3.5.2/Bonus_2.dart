@@ -16,7 +16,6 @@ void printGrades(List<int> grades) {
 void calculateAndPrintAverage(List<int> grades) {
   // Berechnet den Durchschnitt und gibt aus:
   // "Der Durchschnitt ist: 2.0"
-  printGrades(grades);
   int note1 = 2;
   int note2 = 1;
   int note3 = 3;
