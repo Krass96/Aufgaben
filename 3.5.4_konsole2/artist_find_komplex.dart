@@ -1,5 +1,16 @@
 import 'dart:io';
 
+void main() {
+  String artist = searchArtist();
+  print(getArtistInfo(artist));
+
+  // Stundenabfrage und Kostenberechnung
+  askForHoursAndCalculateCost(artist);
+
+  // Event-Buchung
+  print(artBooking(artist));
+}
+
 Map<String, int> artistAndCost = {
   'Musiker': 100,
   'Maler': 200,
@@ -9,7 +20,7 @@ Map<String, int> artistAndCost = {
 };
 
 String searchArtist() {
-  print('Willkommen zum Artist-Finder!');
+  print('Willkommen zum Artist-Finder!\n');
   print('Welche Künstler:in suchst du?');
   print('Gib den Namen ein:');
   String artist = stdin.readLineSync() ?? '';
@@ -42,7 +53,6 @@ String artBooking(String artist) {
       : 'Schade! Vielleicht beim nächsten Mal!';
 }
 
-// Funktion zur Berechnung der Gesamtkosten
 String calculateCost(String artist, int hours) {
   if (artistAndCost.containsKey(artist)) {
     int costPerHour = artistAndCost[artist]!;
@@ -53,7 +63,6 @@ String calculateCost(String artist, int hours) {
   }
 }
 
-// Funktion zur Abfrage der Stunden und Berechnung der Kosten
 void askForHoursAndCalculateCost(String artist) {
   print('Wie viele Stunden möchtest du $artist buchen?');
   String hoursInput = stdin.readLineSync() ?? '';
@@ -63,15 +72,4 @@ void askForHoursAndCalculateCost(String artist) {
   } else {
     print('Ungültige Eingabe für die Stunden.');
   }
-}
-
-void main() {
-  String artist = searchArtist();
-  print(getArtistInfo(artist));
-
-  // Stundenabfrage und Kostenberechnung
-  askForHoursAndCalculateCost(artist);
-
-  // Event-Buchung
-  print(artBooking(artist));
 }
