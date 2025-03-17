@@ -47,7 +47,7 @@ String calculateCost(String artist, int hours) {
   if (artistAndCost.containsKey(artist)) {
     int costPerHour = artistAndCost[artist]!;
     int totalCost = costPerHour * hours;
-    return 'Die Gesamtkosten für $artist für $hours Stunden betragen: \€${totalCost}';
+    return 'Die Gesamtkosten für $artist für $hours Stunden beträgt: \€${totalCost}';
   } else {
     return 'Leider haben wir $artist nicht in unserer App.';
   }
