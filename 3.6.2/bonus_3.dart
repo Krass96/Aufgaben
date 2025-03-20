@@ -18,4 +18,11 @@ class Rectangle {
     int y = edgeWidth;
     return y * x;
   }
+
+  // Method c)
+
+  int scale(int f) {
+    edgeLength = edgeLength * f;
+    return edgeLength;
+  }
 }
