@@ -1,9 +1,11 @@
 class Mage {
   String name;
   int mana;
+  final int maxMana = 100;
 
   Mage(this.name, this.mana);
 
+  /// Gibt die geheilte Mana-Menge zurück.
   int castSpell(Mage target) {
     if (mana < 20) {
       print("$name hat nicht genug Mana, um einen Zauber zu wirken.");
@@ -15,9 +17,9 @@ class Mage {
 
     // 10 Mana hinzufügen, aber nicht über 100
     int healedMana = 10;
-    if (target.mana + 10 > 100) {
-      healedMana = 100 - target.mana;
-      target.mana = 100;
+    if (target.mana + 10 > maxMana) {
+      healedMana = maxMana - target.mana;
+      target.mana = maxMana;
     } else {
       target.mana += 10;
     }
