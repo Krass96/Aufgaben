@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jp_screen/start_page.dart';
+import 'package:jp_screen/src/pages/home_page.dart';
+import 'package:jp_screen/src/pages/start_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,22 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData.dark(),
-      home: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/images/backgrounds/bg_mainscreen.png',
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const StartPage(),
-        ],
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const StartPage(),
+        '/home': (context) => const HomePage(),
+      },
     );
   }
 }
