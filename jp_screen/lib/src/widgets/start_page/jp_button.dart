@@ -6,7 +6,7 @@ class JpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 12),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFFE970C4), Color(0xFFF69EA3)],
@@ -16,7 +16,7 @@ class JpButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(179, 255, 172, 227),
+            color: Color.fromARGB(120, 255, 172, 227),
             blurRadius: 10,
             offset: Offset(0, 1),
             spreadRadius: 1,
@@ -29,7 +29,7 @@ class JpButton extends StatelessWidget {
           fontFamily: 'Inter',
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: Color.fromARGB(255, 255, 255, 255),
           letterSpacing: 1.0,
         ),
       ),

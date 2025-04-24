@@ -19,7 +19,7 @@ class GlassContainer extends StatelessWidget {
               color: const Color.fromARGB(67, 255, 255, 255),
               width: 2,
             ),
-            color: const Color.fromARGB(108, 0, 0, 0),
+            color: const Color.fromARGB(32, 58, 2, 54),
             borderRadius: BorderRadius.circular(16),
           ),
           child: child,
