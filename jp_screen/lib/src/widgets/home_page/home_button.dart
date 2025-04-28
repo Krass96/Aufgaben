@@ -7,25 +7,25 @@ class HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: const RadialGradient(
-          colors: [Color(0xFF908CF5), Color(0xFFBB8DE1)],
-          center: Alignment.center,
-          radius: 1.0,
+        gradient: const LinearGradient(
+          colors: [Color.fromARGB(136, 141, 91, 234), Color(0xFF908CF5)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          width: 1,
+          style: BorderStyle.solid,
+          color: const Color.fromARGB(92, 255, 255, 255),
+        ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x80000000),
-            blurRadius: 50,
-            offset: Offset(0, 0),
-            spreadRadius: 0,
+            color: Color.fromARGB(255, 108, 77, 107),
+            blurRadius: 10,
+            offset: Offset(0, 1),
+            spreadRadius: 1,
           ),
-          BoxShadow(
-            color: Color(0x80FFFFFF),
-            blurRadius: 50,
-            offset: Offset(0, 0),
-            spreadRadius: 0,
-          ),
+          BoxShadow(color: Color(0xFFFFACE4), blurRadius: 1),
         ],
       ),
       child: ElevatedButton(
@@ -33,7 +33,7 @@ class HomeButton extends StatelessWidget {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         ),
@@ -42,7 +42,7 @@ class HomeButton extends StatelessWidget {
           'Add to order',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),

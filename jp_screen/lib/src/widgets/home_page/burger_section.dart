@@ -7,89 +7,92 @@ class BurgerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 12,
-            right: 12,
-            child: Row(
-              children: const [
-                Icon(Icons.star, color: Color(0xFFDE5C87), size: 16),
-                SizedBox(width: 4),
-                Text(
-                  "4.8",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/details/cut_card2.png',
+            fit: BoxFit.fitHeight,
           ),
-          Positioned(
-            right: 0,
-            left: 150,
-            top: 30,
-            child: Hero(
-              tag: 'burger_image',
-              child: Image.asset(
-                'assets/images/grafiken/burger.png',
-                width: 220,
-                height: 220,
-                fit: BoxFit.cover,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Stack(
+            children: [
+              Positioned(
+                top: 21,
+                right: 25,
+                child: Row(
+                  children: const [
+                    Icon(Icons.star, color: Color(0xFFDE5C87), size: 16),
+                    SizedBox(width: 4),
+                    Text("4.8", style: TextStyle(color: Colors.white)),
+                  ],
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 140, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Angi's Yummy Burger",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              Positioned(
+                right: -10,
+                top: 50,
+                child: Hero(
+                  tag: 'burger_image',
+                  child: Image.asset(
+                    'assets/images/grafiken/burger.png',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(height: 4),
-                const Text(
-                  "Delish vegan burger\nthat tastes like heaven",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 140, 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/currency.svg',
-                      height: 16,
-                      width: 16,
-                    ),
-                    const SizedBox(width: 4),
                     const Text(
-                      "13.99",
+                      "Angi's Yummy Burger",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      "Delish vegan burger\nthat tastes like heaven",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/currency.svg',
+                          height: 15,
+                          width: 15,
+                        ),
+                        const SizedBox(width: 4),
+                        const Text(
+                          "13.99",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 50),
+                    const HomeButton(),
                   ],
                 ),
-                const SizedBox(height: 50),
-                const HomeButton(),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

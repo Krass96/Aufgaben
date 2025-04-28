@@ -18,7 +18,7 @@ class WeRecommendSection extends StatelessWidget {
             likes: "200",
             image: 'assets/images/grafiken/moglis_cup.png',
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 20),
           CardView(
             title: "Balu's Cup",
             subtitle: "Pistachio ice cream",
@@ -26,7 +26,7 @@ class WeRecommendSection extends StatelessWidget {
             likes: "180",
             image: 'assets/images/grafiken/balus_cup.png',
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 20),
           CardView(
             title: 'Smilling David',
             subtitle: 'Coffee ice cream',
@@ -34,7 +34,7 @@ class WeRecommendSection extends StatelessWidget {
             likes: '310',
             image: 'assets/images/grafiken/smilling_david.png',
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 20),
           CardView(
             title: 'Kai in a Cone',
             subtitle: 'Vanilla ice cream',

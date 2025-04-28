@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
@@ -33,11 +32,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const CategorySelector(),
-              const SizedBox(height: 20),
-              Row(children: [const SizedBox(width: 12)]),
-              const SizedBox(height: 10),
-              const BurgerSection(),
               const SizedBox(height: 30),
+              const BurgerSection(),
+              const SizedBox(height: 50),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(

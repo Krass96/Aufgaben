@@ -90,10 +90,19 @@ class _CategorySelectorState extends State<CategorySelector> {
                   border: Border.all(
                     color:
                         isSelected
-                            ? const Color.fromARGB(168, 255, 255, 255)
+                            ? const Color(
+                              0xFFFFFFFF,
+                            ) // White stroke for selected
                             : Colors.white24,
                     width: 2,
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26, // Black shadow
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: buttonContent,
               ),
