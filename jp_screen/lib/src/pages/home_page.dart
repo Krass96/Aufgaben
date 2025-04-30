@@ -40,8 +40,8 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   "We Recommend",
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
                 ),

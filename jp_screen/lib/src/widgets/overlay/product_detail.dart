@@ -1,21 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:jp_screen/src/widgets/start_page/glass_container.dart';
+import 'package:jp_screen/src/widgets/start_page/jp_button.dart';
 
 class ProductDetailOverlay extends StatefulWidget {
   final String title;
-  final String description;
+  final String description =
+      'Lorem ipsum dolor sit amet consectetur. Non feugiat imperdiet a vel sit at amet. Mi accumsan feugiat magna aliquam feugiat ac et. Pulvinar hendrerit id arcu at sed etiam semper mi hendrerit. Id aliquet quis quam.';
   final double price;
   final String imageAsset;
   final int likes;
-  final double rating;
 
   const ProductDetailOverlay({
     super.key,
     required this.title,
-    required this.description,
     required this.price,
     required this.imageAsset,
     required this.likes,
-    required this.rating,
   });
 
   @override
@@ -23,376 +25,241 @@ class ProductDetailOverlay extends StatefulWidget {
 }
 
 class _ProductDetailOverlayState extends State<ProductDetailOverlay> {
-  int quantity = 1;
-  String selectedSize = 'Large';
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.black,
-      child: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.85,
-          decoration: BoxDecoration(
-            color: const Color(0xFF282828),
-            borderRadius: BorderRadius.circular(24),
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          // Close button
+          Container(color: const Color.fromARGB(161, 0, 0, 0)),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: screenHeight * 0.83,
+            child: Container(
+              decoration: BoxDecoration(color: Color(0xFF2F2B22)),
+            ),
           ),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              // Close button
-              Positioned(
-                top: 20,
-                right: 20,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.close,
+          Positioned(
+            top: 160,
+            right: 10,
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color.fromARGB(255, 50, 50, 50),
+                ),
+                padding: const EdgeInsets.all(8),
+                child: const Icon(
+                  Icons.close,
+                  color: Color.fromARGB(150, 255, 255, 255),
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+
+          // Product image
+          Positioned(
+            top: -50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Image.asset(
+                widget.imageAsset,
+                width: 500,
+                height: 500,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+
+          Positioned(
+            bottom: 200,
+            left: 30,
+            right: 30,
+            child: GlassContainer(
+              height: 340,
+              width: 170,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
                       color: Colors.white,
-                      size: 16,
                     ),
                   ),
-                ),
-              ),
-
-              // Product image - positioned at the top and slightly overflowing
-              Positioned(
-                top: -80,
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Image.asset(
-                    widget.imageAsset,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.contain,
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.description,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: const Color(0xB1FFFFFF),
+                      height: 1.5,
+                    ),
                   ),
-                ),
-              ),
-
-              // Content container
-              Positioned(
-                top: 160,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Heart icon and likes
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.favorite_border,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              widget.likes.toString(),
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Title
                       Text(
-                        widget.title,
-                        style: const TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Description
-                      Text(
-                        widget.description,
-                        textAlign: TextAlign.center,
+                        '₳',
                         style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white70,
-                          height: 1.5,
+                          fontSize: 24,
+                          color: Color(0xFFF0E0EF),
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-
-                      const SizedBox(height: 20),
-
-                      // Price
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "₹ ${widget.price.toStringAsFixed(2)}",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 20),
-
-                      // Divider
-                      Container(height: 1, color: Colors.white10),
-
-                      const SizedBox(height: 20),
-
-                      // Ingredients and Reviews row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Ingredients
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Ingredients",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/LowFat.png',
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Image.asset(
-                                    'assets/icons/Kcal.png',
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Image.asset(
-                                    'assets/icons/Sugar.png',
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Image.asset(
-                                    'assets/icons/Gluten 1.png',
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-
-                          // Reviews
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Reviews",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  _buildStar(1, widget.rating),
-                                  _buildStar(2, widget.rating),
-                                  _buildStar(3, widget.rating),
-                                  _buildStar(4, widget.rating),
-                                  _buildStar(5, widget.rating),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    widget.rating.toStringAsFixed(1),
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white70,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 30),
-
-                      // Size selector
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _buildSizeButton('Small'),
-                          const SizedBox(width: 8),
-                          _buildSizeButton('Medium'),
-                          const SizedBox(width: 8),
-                          _buildSizeButton('Large'),
-                        ],
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      // Quantity selector
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _buildQuantityButton(Icons.remove, () {
-                            if (quantity > 1) {
-                              setState(() {
-                                quantity--;
-                              });
-                            }
-                          }),
-                          Container(
-                            width: 50,
-                            alignment: Alignment.center,
-                            child: Text(
-                              quantity.toString(),
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          _buildQuantityButton(Icons.add, () {
-                            setState(() {
-                              quantity++;
-                            });
-                          }),
-                        ],
-                      ),
-
-                      const SizedBox(height: 30),
-
-                      // Add to order button
-                      Container(
-                        width: double.infinity,
-                        height: 54,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFD65DB1), Color(0xFFFF6584)],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFFD65DB1),
-                              blurRadius: 8,
-                              spreadRadius: 2,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Add to order for ₹ ${(widget.price * quantity).toStringAsFixed(2)}",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                      const SizedBox(width: 1),
+                      Text(
+                        widget.price.toString(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFFF0E0EF),
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                     ],
                   ),
-                ),
+                  SizedBox(height: 10),
+                  Divider(thickness: 0.4, color: Colors.white),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Ingredients',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Color(0xB1FFFFFF),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/icons/Gluten 1.png',
+                                width: 18,
+                                height: 18,
+                              ),
+                              const SizedBox(width: 8),
+                              Image.asset(
+                                'assets/icons/Sugar.png',
+                                width: 18,
+                                height: 18,
+                              ),
+                              const SizedBox(width: 8),
+                              Image.asset(
+                                'assets/icons/LowFat.png',
+                                width: 18,
+                                height: 18,
+                              ),
+                              const SizedBox(width: 8),
+                              Image.asset(
+                                'assets/icons/Kcal.png',
+                                width: 18,
+                                height: 18,
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Reviews',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Color(0xB1FFFFFF),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: const Color(0xB1FFFFFF),
+                                size: 18,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: const Color(0xB1FFFFFF),
+                                size: 18,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: const Color(0xB1FFFFFF),
+                                size: 18,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: const Color(0xB1FFFFFF),
+                                size: 18,
+                              ),
+                              Icon(
+                                Icons.star_border,
+                                color: const Color(0xB1FFFFFF),
+                                size: 18,
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                '4.0',
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Color.fromARGB(140, 255, 255, 255),
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
-  }
+          Positioned(
+            top: 700,
+            left: 20,
+            right: 200,
+            child: CupertinoSlidingSegmentedControl<int>(
+              thumbColor: const Color.fromARGB(255, 95, 93, 93),
 
-  Widget _buildIngredientIcon(IconData icon) {
-    return Container(
-      width: 30,
-      height: 30,
-      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-      child: Icon(icon, color: Colors.white, size: 16),
-    );
-  }
-
-  Widget _buildStar(int position, double rating) {
-    final bool filled = position <= rating;
-    final bool halfFilled = position == (rating.ceil()) && rating % 1 != 0;
-
-    return Icon(
-      halfFilled ? Icons.star_half : (filled ? Icons.star : Icons.star_border),
-      color: filled || halfFilled ? Colors.amber : Colors.white,
-      size: 16,
-    );
-  }
-
-  Widget _buildSizeButton(String size) {
-    final isSelected = selectedSize == size;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedSize = size;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF3A3A3A) : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isSelected ? Colors.white : Colors.white,
-            width: 1,
+              groupValue: 2,
+              children: const {
+                0: Text('Small', style: TextStyle(color: Color(0x9DFFFFFF))),
+                1: Text('Medium', style: TextStyle(color: Color(0x9DFFFFFF))),
+                2: Text('Large', style: TextStyle(color: Color(0xE0FFFFFF))),
+              },
+              onValueChanged: (value) {},
+            ),
           ),
-        ),
-        child: Text(
-          size,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.white,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          Positioned(
+            bottom: 30,
+            left: 0,
+            right: 0,
+            child: JpButton(
+              text: 'Add to order for ₳${widget.price}',
+              fontSize: 18,
+              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 12),
+            ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuantityButton(IconData icon, VoidCallback onPressed) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-        child: Icon(icon, color: Colors.white, size: 18),
+        ],
       ),
     );
   }

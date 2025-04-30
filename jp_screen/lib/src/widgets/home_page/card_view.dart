@@ -24,18 +24,15 @@ class CardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder:
-                (context) => const ProductDetailOverlay(
-                  title: "Mogli's Cup",
-                  description:
-                      'Lorem ipsum dolor sit amet consectetur. Non feugiat imperdiet a vel sit at amet. Mi accumsan feugiat magna aliquam feugiat ac et. Pulvinar hendrerit id arcu at sed etiam semper mi hendrerit. Id aliquet quis quam.',
-                  price: 8.99,
-                  imageAsset: 'assets/images/grafiken/moglis_cup.png',
-                  likes: 200,
-                  rating: 5,
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            pageBuilder:
+                (BuildContext context, _, __) => ProductDetailOverlay(
+                  title: title,
+                  price: double.parse(price),
+                  imageAsset: image,
+                  likes: int.parse(likes),
                 ),
           ),
         );

@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  custom_sliding_segmented_control:
+    dependency: "direct main"
+    description:
+      name: custom_sliding_segmented_control
+      sha256: bc747b1500284bff36fc8c61774c9a3ca35c1dca4d570141c8a2569b4f984bf3
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.5"
   fake_async:
     dependency: transitive
     description:
@@ -94,6 +102,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_rating_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_bar
+      sha256: d2af03469eac832c591a1eba47c91ecc871fe5708e69967073c043b2d775ed93
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
+  flutter_sfsymbols:
+    dependency: "direct main"
+    description:
+      name: flutter_sfsymbols
+      sha256: e72565d9ed3e55fa4fb32920882a485245ba7791e49477b03c0597b2e41e7064
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter_svg:
     dependency: "direct main"
     description:

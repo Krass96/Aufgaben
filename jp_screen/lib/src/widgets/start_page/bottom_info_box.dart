@@ -22,8 +22,8 @@ class BottomInfoBox extends StatelessWidget {
                   'Feeling Snackish Today?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
                     color: Colors.white,
                   ),
                 ),
@@ -36,7 +36,7 @@ class BottomInfoBox extends StatelessWidget {
                 const SizedBox(height: 24),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, '/home'),
-                  child: const JpButton(),
+                  child: const JpButton(text: 'Order Now'),
                 ),
               ],
             ),

@@ -1,36 +1,48 @@
 import 'package:flutter/material.dart';
 
 class JpButton extends StatelessWidget {
-  const JpButton({super.key});
+  final String text;
+  final double? fontSize;
+  final EdgeInsetsGeometry? padding;
+  final double? width;
+
+  const JpButton({
+    super.key,
+    required this.text,
+    this.fontSize = 18,
+    this.padding,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 12),
+      width: width,
+      padding:
+          padding ?? const EdgeInsets.symmetric(horizontal: 60, vertical: 12),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFFE970C4), Color(0xFFF69EA3)],
+          colors: [Color.fromARGB(255, 232, 93, 190), Color(0xFFF69EA3)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(120, 255, 172, 227),
+            color: Color.fromARGB(82, 255, 172, 227),
             blurRadius: 10,
             offset: Offset(0, 1),
             spreadRadius: 1,
           ),
         ],
       ),
-      child: const Text(
-        "Order Now",
+      child: Text(
+        text,
         style: TextStyle(
-          fontFamily: 'Inter',
-          fontSize: 18,
+          fontSize: fontSize,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 255, 255, 255),
-          letterSpacing: 1.0,
+          letterSpacing: 0.1,
         ),
       ),
     );
