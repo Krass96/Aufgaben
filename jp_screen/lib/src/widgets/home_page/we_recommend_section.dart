@@ -23,7 +23,7 @@ class WeRecommendSection extends StatelessWidget {
             title: "Balu's Cup",
             subtitle: "Pistachio ice cream",
             price: "8.99",
-            likes: "180",
+            likes: "165",
             image: 'assets/images/grafiken/balus_cup.png',
           ),
           const SizedBox(width: 20),

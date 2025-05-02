@@ -39,18 +39,6 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: assets/images/grafiken/cupcake_chick.png
+  image_path: assets/images/grafiken/app_icon.png
 
-flutter_native_splash:
-  color: "#000000"
-  image: assets/images/grafiken/cupcake_chick.png
-  android: true
-  ios: true
-  fullscreen: true
-  web: false
-  remove_after: true
-  android_gravity: center
-  ios_background_color: "#000000"
-  android_background_color: "#000000"
-  ios_background_image: assets/images/grafiken/cupcake_chick.png
 

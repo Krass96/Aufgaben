@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jp_screen/src/widgets/start_page/glass_container.dart';
-import 'package:jp_screen/src/widgets/start_page/jp_button.dart';
+import 'package:jp_screen/src/widgets/start_page/start_button.dart';
 
 class BottomInfoBox extends StatelessWidget {
   const BottomInfoBox({super.key});
@@ -8,7 +8,7 @@ class BottomInfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 10,
+      bottom: 5,
       right: 1,
       left: 1,
       child: Center(
@@ -36,7 +36,7 @@ class BottomInfoBox extends StatelessWidget {
                 const SizedBox(height: 24),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, '/home'),
-                  child: const JpButton(text: 'Order Now'),
+                  child: const StartButton(text: 'Order Now', width: 220),
                 ),
               ],
             ),

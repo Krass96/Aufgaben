@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeButton extends StatelessWidget {
   const HomeButton({super.key});
@@ -12,7 +13,7 @@ class HomeButton extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           width: 1,
           style: BorderStyle.solid,
@@ -35,15 +36,17 @@ class HomeButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         ),
         onPressed: () {},
-        child: const Text(
+        child: Text(
           'Add to order',
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
-            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.inter().fontFamily,
+            letterSpacing: 0.1,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

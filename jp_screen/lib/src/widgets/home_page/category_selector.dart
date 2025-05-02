@@ -51,7 +51,6 @@ class _CategorySelectorState extends State<CategorySelector> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(width: 5),
                         const Icon(
                           Icons.keyboard_arrow_down,
                           color: Colors.white70,
@@ -84,21 +83,24 @@ class _CategorySelectorState extends State<CategorySelector> {
                 decoration: BoxDecoration(
                   color:
                       isSelected
-                          ? const Color(0xFFF9BDF1)
-                          : Colors.white.withAlpha(30),
+                          ? const Color.fromARGB(255, 244, 200, 238)
+                          : const Color.fromARGB(
+                            179,
+                            255,
+                            255,
+                            255,
+                          ).withAlpha(30),
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(
                     color:
                         isSelected
-                            ? const Color(
-                              0xFFFFFFFF,
-                            ) // White stroke for selected
+                            ? const Color.fromARGB(184, 255, 255, 255)
                             : Colors.white24,
                     width: 2,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black26, // Black shadow
+                      color: Colors.black26,
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),

@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:jp_screen/src/widgets/overlay/product_detail.dart';
+import 'package:jp_screen/src/pages/product_detail.dart';
 
-class CardView extends StatelessWidget {
+class CardView extends StatefulWidget {
   final String title;
   final String subtitle;
   final String price;
@@ -21,19 +21,33 @@ class CardView extends StatelessWidget {
   });
 
   @override
+  State<CardView> createState() => _CardViewState();
+}
+
+class _CardViewState extends State<CardView> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           PageRouteBuilder(
             opaque: false,
-            pageBuilder:
-                (BuildContext context, _, __) => ProductDetailOverlay(
-                  title: title,
-                  price: double.parse(price),
-                  imageAsset: image,
-                  likes: int.parse(likes),
-                ),
+            pageBuilder: (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) {
+              return Builder(
+                builder: (BuildContext innerContext) {
+                  return ProductDetailOverlay(
+                    title: widget.title,
+                    price: double.parse(widget.price),
+                    imageAsset: widget.image,
+                    likes: int.parse(widget.likes),
+                  );
+                },
+              );
+            },
           ),
         );
       },
@@ -69,16 +83,16 @@ class CardView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: image,
+                  tag: widget.image,
                   child: Image.asset(
-                    image,
+                    widget.image,
                     width: 148,
                     height: 148,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Text(
-                  title,
+                  widget.title,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -89,7 +103,7 @@ class CardView extends StatelessWidget {
                 ),
 
                 Text(
-                  subtitle,
+                  widget.subtitle,
                   style: const TextStyle(fontSize: 12, color: Colors.white70),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -107,7 +121,7 @@ class CardView extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          price,
+                          widget.price,
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -124,7 +138,7 @@ class CardView extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          likes,
+                          widget.likes,
                           style: const TextStyle(
                             fontSize: 12,
                             color: Colors.white70,

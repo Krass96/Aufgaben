@@ -24,9 +24,18 @@ class BurgerSection extends StatelessWidget {
                 right: 25,
                 child: Row(
                   children: const [
-                    Icon(Icons.star, color: Color(0xFFDE5C87), size: 16),
-                    SizedBox(width: 4),
-                    Text("4.8", style: TextStyle(color: Colors.white)),
+                    Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 243, 130, 168),
+                      size: 16,
+                    ),
+                    Text(
+                      "4.8",
+                      style: TextStyle(
+                        color: Color.fromARGB(225, 255, 255, 255),
+                        fontSize: 12,
+                      ),
+                    ),
                   ],
                 ),
               ),
