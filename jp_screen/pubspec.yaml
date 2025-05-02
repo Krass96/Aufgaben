@@ -13,6 +13,8 @@ dependencies:
   custom_sliding_segmented_control: ^1.8.5
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
   flutter_rating_bar: ^4.0.1
   flutter_sfsymbols: ^2.0.0
   flutter_svg: ^2.0.0
@@ -33,3 +35,22 @@ flutter:
     - assets/images/grafiken/
     - assets/icons/
     - assets/screens/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/images/grafiken/cupcake_chick.png
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/grafiken/cupcake_chick.png
+  android: true
+  ios: true
+  fullscreen: true
+  web: false
+  remove_after: true
+  android_gravity: center
+  ios_background_color: "#000000"
+  android_background_color: "#000000"
+  ios_background_image: assets/images/grafiken/cupcake_chick.png
+
