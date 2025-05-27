@@ -14,7 +14,8 @@ class Aufgabe3 extends StatefulWidget {
 class _Aufgabe3State extends State<Aufgabe3> {
   String input = 'Go';
 
-  String tripleString(String input) {
+  Future<String> tripleString(String input) async {
+    await Future.delayed(Duration(seconds: 3));
     return input * 3;
   }
 
@@ -31,9 +32,10 @@ class _Aufgabe3State extends State<Aufgabe3> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  String result = await tripleString(input);
                   setState(() {
-                    input = tripleString(input);
+                    input = result;
                   });
                 },
                 child: const Text('Triple String'),
