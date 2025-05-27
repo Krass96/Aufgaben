@@ -17,6 +17,13 @@ class _Aufgabe3State extends State<Aufgabe3> {
 
   Future<String> tripleString(String input) async {
     await Future.delayed(Duration(seconds: 3));
+    try {
+      if (input.isEmpty) {
+        throw Exception('Input cannot be empty');
+      }
+    } catch (e) {
+      return 'Error: ${e.toString()}';
+    }
     return input * 3;
   }
 
