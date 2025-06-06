@@ -19,7 +19,7 @@ class _Aufgabe3State extends State<Aufgabe3> {
     await Future.delayed(Duration(seconds: 3));
     try {
       if (input.isEmpty) {
-        throw Exception('Input cannot be empty');
+        debugPrint('Input is empty');
       }
     } catch (e) {
       return 'Error: ${e.toString()}';
@@ -53,6 +53,15 @@ class _Aufgabe3State extends State<Aufgabe3> {
                 child: isLoading
                     ? CircularProgressIndicator()
                     : Text('Triple String'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    input = 'Go';
+                  });
+                },
+                child: Text('Reset'),
               ),
             ],
           ),
