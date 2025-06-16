@@ -1,6 +1,7 @@
-import 'dart:math';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(AufgabeAPI());
@@ -13,114 +14,179 @@ class AufgabeAPI extends StatefulWidget {
   State<AufgabeAPI> createState() => _AufgabeAPIState();
 }
 
-class _AufgabeAPIState extends State<AufgabeAPI> {
-  final jokeController = TextEditingController();
-  final dateController = TextEditingController();
-  final urlController = TextEditingController();
+class _AufgabeAPIState extends State<AufgabeAPI>
+    with SingleTickerProviderStateMixin {
+  String joke = '';
+  String createdAt = '';
+  String url = '';
+  bool isLoading = false;
+  late AnimationController _controller;
 
-  List<Map<String, dynamic>> jokeList = [
-    {
-      "categories": [],
-      "created_at": "2020-01-05 13:42:24.40636",
-      "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
-      "id": "DfNJKCAWTV6ARaxCxhkwhg",
-      "updated_at": "2020-01-05 13:42:24.40636",
-      "url": "https://api.chucknorris.io/jokes/DfNJKCAWTV6ARaxCxhkwhg",
-      "value":
-          "Chuck Norris can win a gunfight without firing a shot. And without a gun."
-    },
-    {
-      "categories": [],
-      "created_at": "2020-01-05 13:42:26.194739",
-      "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
-      "id": "HKTxq1ZwScGqlBAnnPzMMQ",
-      "updated_at": "2020-01-05 13:42:26.194739",
-      "url": "https://api.chucknorris.io/jokes/HKTxq1ZwScGqlBAnnPzMMQ",
-      "value":
-          "Chuck Norris once put a man in an eight-month coma just by hurting his feelings."
-    },
-    {
-      "categories": [],
-      "created_at": "2020-01-05 13:42:30.730109",
-      "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
-      "id": "2MvOyHpeRIq_-cyRSCLf_A",
-      "updated_at": "2020-01-05 13:42:30.730109",
-      "url": "https://api.chucknorris.io/jokes/2MvOyHpeRIq_-cyRSCLf_A",
-      "value":
-          "When Chuck Norris makes a play on words, it becomes a broadway hit."
-    },
-    {
-      "categories": [],
-      "created_at": "2020-01-05 13:42:22.701402",
-      "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
-      "id": "HufBuaK0QauX8u8qg-HEhA",
-      "updated_at": "2020-01-05 13:42:22.701402",
-      "url": "https://api.chucknorris.io/jokes/HufBuaK0QauX8u8qg-HEhA",
-      "value":
-          "Chuck Norris was aboard the Costa Concordia. When it sank, Chuck Norris inflated his beard and swam away with 427 grateful passengers."
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat();
+  }
+
+  Future<void> fetchJoke() async {
+    setState(() {
+      isLoading = true;
+      _controller.repeat();
+    });
+    try {
+      await Future.delayed(Duration(seconds: 2));
+      final response = await http.get(
+          Uri.parse('https://api.chucknorris.io/jokes/random?category=dev'));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          joke = data['value'];
+          createdAt = data['created_at'];
+          url = data['url'];
+        });
+      } else {
+        setState(() {
+          joke = 'Fehler beim Laden des Witzes!';
+          createdAt = '';
+          url = '';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        joke = 'Fehler: $e';
+        createdAt = '';
+        url = '';
+      });
+    } finally {
+      setState(() {
+        isLoading = false;
+        _controller.stop();
+      });
     }
-  ];
+  }
+
+  void resetFields() {
+    setState(() {
+      joke = '';
+      createdAt = '';
+      url = '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.cyanAccent,
-          title: Text('Chuck Norris Jokes'),
+          toolbarHeight: 300,
+          title: Column(
+            children: [
+              Text(
+                'Chuck Norris Jokes',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Image.asset(
+                'assets/images/chuck_norris.png',
+                width: 250,
+                height: 250,
+              )
+            ],
+          ),
+          backgroundColor: Colors.amber,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+          ),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              spacing: 16,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: jokeController,
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                      hintText: 'Joke', border: OutlineInputBorder()),
-                ),
-                TextField(
-                  controller: dateController,
-                  decoration: InputDecoration(
-                      hintText: 'Create Date', border: OutlineInputBorder()),
-                ),
-                TextField(
-                  controller: urlController,
-                  maxLines: 2,
-                  decoration: InputDecoration(
-                      hintText: 'Url', border: OutlineInputBorder()),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      final random = Random();
-                      final randomIndex = random.nextInt(jokeList.length);
-                      final randomJoke = jokeList[randomIndex];
-                      setState(() {
-                        jokeController.text = randomJoke['value'];
-                        dateController.text = randomJoke['created_at'];
-                        urlController.text = randomJoke['url'];
-                      });
-                    },
-                    child: Text('Give me a Joke')),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      jokeController.clear();
-                      dateController.clear();
-                      urlController.clear();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[300],
-                    foregroundColor: Colors.black,
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Card(
+            color: Colors.black,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(color: Colors.amber, width: 2)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                spacing: 16,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (isLoading)
+                    RotationTransition(
+                        turns: _controller,
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/chuck_norris.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                        ))
+                  else ...[
+                    TextField(
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        hintText: joke,
+                        hintStyle: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(color: Colors.amber),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 200),
+                      child: Text(
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold),
+                          'Created at: ${createdAt.isNotEmpty ? createdAt.substring(0, 10) : ''}'),
+                    ),
+                    SizedBox(height: 10),
+                    if (url.isNotEmpty)
+                      InkWell(
+                        child: Text(
+                          '---> Joke Link',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onTap: () async {
+                          final uri = Uri.parse(url);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri);
+                          }
+                        },
+                      )
+                  ],
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: fetchJoke,
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+                    child: Text(
+                      'Give me a Joke',
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
-                  child: Text('Reset'),
-                ),
-              ],
+                  ElevatedButton(
+                    onPressed: resetFields,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
+                    ),
+                    child: Text('Reset'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -130,9 +196,7 @@ class _AufgabeAPIState extends State<AufgabeAPI> {
 
   @override
   void dispose() {
-    jokeController.dispose();
-    dateController.dispose();
-    urlController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }
